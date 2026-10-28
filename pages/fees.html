@@ -72,6 +72,87 @@
         </div>
       </section>
 
+<section class="section">
+  <div class="container">
+    <div class="split-panel">
+      <div>
+        <p class="eyebrow">Plan your budget</p>
+        <h2>Calculate Your Escape Fees</h2>
+        <p>Choose your escape package and number of travellers to estimate your total cost.</p>
+      </div>
+
+      <div class="price-card">
+        <form id="feeCalculator">
+          <label for="package">Choose your package</label>
+          <select id="package" required>
+            <option value="850">Day Escape — R850 per person</option>
+            <option value="2350">Weekend Escape — R2,350 per person</option>
+          </select>
+
+          <label for="travellers" style="display:block; margin-top:1rem;">
+            Number of travellers
+          </label>
+          <input
+            id="travellers"
+            type="number"
+            min="1"
+            max="100"
+            value="1"
+            required
+            style="width:100%; padding:0.75rem; margin-top:0.5rem;"
+          />
+
+          <button class="button primary" type="submit"
+            style="margin-top:1rem; cursor:pointer;">
+            Calculate Total
+          </button>
+        </form>
+
+        <div id="feeResult" aria-live="polite"
+          style="display:none; margin-top:1.5rem;">
+          <h3>Your Estimated Cost</h3>
+          <p id="packageDetails"></p>
+          <p id="travellerDetails"></p>
+          <h2 id="totalCost"></h2>
+          <p>Final prices may vary depending on your booking.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById("feeCalculator").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const price = Number(document.getElementById("package").value);
+    const travellers = Number(document.getElementById("travellers").value);
+
+    if (!Number.isInteger(travellers) || travellers < 1 || travellers > 100) {
+      alert("Please enter between 1 and 100 travellers.");
+      return;
+    }
+
+    const total = price * travellers;
+    const packageName = price === 850 ? "Day Escape" : "Weekend Escape";
+
+    document.getElementById("packageDetails").textContent =
+      "Package: " + packageName;
+
+    document.getElementById("travellerDetails").textContent =
+      "Travellers: " + travellers;
+
+    document.getElementById("totalCost").textContent =
+      "Total: " + new Intl.NumberFormat("en-ZA", {
+        style: "currency",
+        currency: "ZAR",
+        maximumFractionDigits: 2
+      }).format(total);
+
+    document.getElementById("feeResult").style.display = "block";
+  });
+</script>
+
       <section class="section muted">
         <div class="container split-panel">
           <div>
