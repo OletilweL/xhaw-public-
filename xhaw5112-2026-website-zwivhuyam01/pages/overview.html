@@ -1,0 +1,783 @@
+﻿<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview - Adventure Escape SA</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display (Serif Titles) & Plus Jakarta Sans / Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slateNavy: {
+                            800: '#263644',
+                            900: '#2c3e4d',
+                            950: '#1e2b36',
+                        },
+                        peach: {
+                            DEFAULT: '#e59b58',
+                            hover: '#d88d49',
+                            badge: '#e8a268',
+                            light: '#fdf3eb',
+                        },
+                        sage: {
+                            600: '#5c736a',
+                            700: '#6e857b',
+                            800: '#53685e',
+                        },
+                        plum: {
+                            800: '#4a3d51',
+                            900: '#3d3242',
+                            950: '#2d2432',
+                        },
+                        cardBg: '#f3f5f6',
+                        tagEasy: '#38a169',
+                        tagEasyBg: '#e6fffa',
+                        tagMod: '#dd6b20',
+                        tagModBg: '#feebc8',
+                        tagHard: '#e53e3e',
+                        tagHardBg: '#fff5f5',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f3f5f6;
+            color: #2D3748;
+        }
+
+        .serif-title {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        /* Hero image blend and typography shadowing */
+        .hero-bg-overlay {
+            background: linear-gradient(180deg, rgba(44, 62, 77, 0.82) 0%, rgba(44, 62, 77, 0.94) 100%),
+                        url('https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&q=80&w=1800') center/cover no-repeat;
+        }
+
+        /* Active Filter Pill Styling */
+        .filter-pill {
+            transition: all 0.2s ease-in-out;
+        }
+        .filter-pill.active {
+            background-color: #2c3e4d;
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(44, 62, 77, 0.25);
+        }
+
+        /* Card transition effects */
+        .activity-card {
+            transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+        }
+        .activity-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Modal backdrop transition */
+        .modal-backdrop {
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        /* Custom scrollbar for clean aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2c3e4d;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-peach selection:text-white">
+
+    <header class="bg-slateNavy-900 text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <a href="home.html" class="flex items-center gap-3 group">
+                <div class="flex items-center gap-2">
+                    <!-- Mountain Logo Graphic -->
+                    <div class="w-10 h-10 bg-slateNavy-800 rounded-md border border-white/20 flex items-center justify-center p-1 relative overflow-hidden">
+                        <i class="fa-solid fa-mountain text-emerald-400 text-lg"></i>
+                        <i class="fa-solid fa-sun text-peach text-xs absolute top-1 right-1"></i>
+                    </div>
+                    <div>
+                        <span class="block text-sm font-extrabold tracking-wider uppercase text-white leading-none">ESCAPE SA</span>
+                        <div class="flex items-center gap-1 mt-1 opacity-75 text-[9px] text-gray-300">
+                            <i class="fa-solid fa-compass"></i>
+                            <i class="fa-solid fa-person-hiking"></i>
+                            <i class="fa-solid fa-water"></i>
+                            <i class="fa-solid fa-tree"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="home.html" class="text-gray-300 hover:text-white transition">Home</a>
+                <a href="overview.html" class="text-white font-semibold relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-peach">Overview</a>
+                <a href="about.html" class="text-gray-300 hover:text-white transition">About Us</a>
+                <a href="contact.html" class="text-gray-300 hover:text-white transition">Contact Us</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden sm:block">
+                <button onclick="openBookingModal('General Booking')" class="bg-peach hover:bg-peach-hover text-slateNavy-900 font-bold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm hover:shadow-md">
+                    Book Now
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white p-2">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slateNavy-950 border-t border-white/10 px-4 pt-3 pb-6 space-y-3">
+            <a href="home.html" class="block text-gray-300 py-2 hover:text-white">Home</a>
+            <a href="overview.html" class="block text-peach font-semibold py-2">Overview</a>
+            <a href="about.html" class="block text-gray-300 py-2 hover:text-white">About Us</a>
+            <a href="contact.html" class="block text-gray-300 py-2 hover:text-white">Contact Us</a>
+            <button onclick="openBookingModal('General Booking')" class="w-full text-center bg-peach text-slateNavy-900 font-bold py-2.5 rounded-full mt-2">Book Now</button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="hero-bg-overlay text-white pt-12 pb-16 px-4 sm:px-6 lg:px-8 relative">
+            <div class="max-w-7xl mx-auto">
+                <!-- Breadcrumbs -->
+                <nav class="flex text-xs font-medium text-gray-300 mb-6 space-x-2 items-center">
+                    <a href="home.html" class="hover:underline opacity-80 hover:opacity-100">Home</a>
+                    <span class="opacity-40"><i class="fa-solid fa-chevron-right text-[9px]"></i></span>
+                    <span class="text-white font-semibold">Overview</span>
+                </nav>
+
+                <!-- Main Hero Heading -->
+                <h1 class="serif-title text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4">
+                    Explore Our Adventures
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-gray-200 text-base sm:text-lg max-w-2xl font-light leading-relaxed mb-12">
+                    Discover thrilling outdoor experiences across South Africa's most spectacular landscapes.
+                </p>
+
+                <!-- Statistics Bar -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-white/15 text-center">
+                    <div class="space-y-1">
+                        <div class="serif-title text-3xl sm:text-4xl font-bold text-peach">12+</div>
+                        <div class="text-[11px] font-bold text-gray-300 tracking-wider uppercase">ACTIVITIES</div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="serif-title text-3xl sm:text-4xl font-bold text-peach">6</div>
+                        <div class="text-[11px] font-bold text-gray-300 tracking-wider uppercase">REGIONS</div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="serif-title text-3xl sm:text-4xl font-bold text-peach">4 800+</div>
+                        <div class="text-[11px] font-bold text-gray-300 tracking-wider uppercase">HAPPY ADVENTURERS</div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="serif-title text-3xl sm:text-4xl font-bold text-peach">98%</div>
+                        <div class="text-[11px] font-bold text-gray-300 tracking-wider uppercase">SATISFACTION RATE</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 sm:px-6 rounded-2xl shadow-sm border border-gray-200/80 mb-8">
+                
+                <div class="flex items-center gap-3 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
+                    <span class="text-sm font-bold text-gray-700 shrink-0">Filter:</span>
+                    
+                    <button onclick="filterActivities('All', this)" class="filter-pill active px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        All
+                    </button>
+                    <button onclick="filterActivities('Hiking', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        Hiking
+                    </button>
+                    <button onclick="filterActivities('Kayaking', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        Kayaking
+                    </button>
+                    <button onclick="filterActivities('Zip-lining', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        Zip-lining
+                    </button>
+                    <button onclick="filterActivities('Rock Climbing', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        Rock Climbing
+                    </button>
+                    <button onclick="filterActivities('Mountain Biking', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        Mountain Biking
+                    </button>
+                    <button onclick="filterActivities('Rafting', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        Rafting
+                    </button>
+                </div>
+
+                <div class="text-xs font-medium text-gray-500 shrink-0 self-end md:self-center" id="activity-count">
+                    6 activities
+                </div>
+            </div>
+
+            <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- CARD 1: Table Mountain Trail Hike -->
+                <div class="activity-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 flex flex-col justify-between" data-category="Hiking">
+                    <div>
+                        <!-- Card Image Container with Badges -->
+                        <div class="relative h-56 overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800" alt="Table Mountain Trail Hike" class="w-full h-full object-cover">
+                            <!-- Category Badge Top-Left -->
+                            <span class="absolute top-3 left-3 bg-peach text-white font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-md shadow-sm">
+                                HIKING
+                            </span>
+                            <!-- Price Tag Bottom-Right -->
+                            <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-slateNavy-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">
+                                From R150
+                            </span>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="p-6">
+                            <h3 class="serif-title text-xl font-bold text-slateNavy-900 mb-2">
+                                Table Mountain Trail Hike
+                            </h3>
+                            
+                            <!-- Location -->
+                            <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
+                                <i class="fa-solid fa-location-dot text-gray-400"></i>
+                                <span>Cape Town, Western Cape</span>
+                            </div>
+
+                            <!-- Duration & Difficulty Badges -->
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md font-medium">
+                                    <i class="fa-regular fa-clock text-gray-400 text-xs"></i> 4&ndash;6 hours
+                                </span>
+                                <span class="inline-flex items-center text-xs text-amber-800 bg-amber-100 px-2.5 py-1 rounded-md font-semibold">
+                                    Moderate
+                                </span>
+                            </div>
+
+                            <!-- Paragraph -->
+                            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
+                                Experience the iconic Table Mountain on foot. Choose from multiple trails offering panoramic views of Cape Town, the Atlantic Seaboard, and the Cape Peninsula.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card Actions Row -->
+                    <div class="p-6 pt-0 grid grid-cols-2 gap-3 mt-4">
+                        <button onclick="openBookingModal('Table Mountain Trail Hike')" class="bg-slateNavy-900 hover:bg-slateNavy-950 text-white font-bold text-xs py-2.5 rounded-lg transition text-center shadow-sm">
+                            Book Now
+                        </button>
+                        <button onclick="openDetailsModal('Table Mountain Trail Hike', 'Experience the iconic Table Mountain on foot with certified mountain guides. Explore diverse flora, historic contours, and breathtaking Atlantic sea views.', 'R150', 'Cape Town', '4-6 hours', 'Moderate')" class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 rounded-lg transition text-center">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 2: Knysna Lagoon Kayak Tour -->
+                <div class="activity-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 flex flex-col justify-between" data-category="Kayaking">
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800" alt="Knysna Lagoon Kayak Tour" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-peach text-white font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-md shadow-sm">
+                                KAYAKING
+                            </span>
+                            <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-slateNavy-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">
+                                From R280
+                            </span>
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="serif-title text-xl font-bold text-slateNavy-900 mb-2">
+                                Knysna Lagoon Kayak Tour
+                            </h3>
+                            
+                            <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
+                                <i class="fa-solid fa-location-dot text-gray-400"></i>
+                                <span>Knysna, Garden Route</span>
+                            </div>
+
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md font-medium">
+                                    <i class="fa-regular fa-clock text-gray-400 text-xs"></i> 2&ndash;3 hours
+                                </span>
+                                <span class="inline-flex items-center text-xs text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-md font-semibold">
+                                    Easy
+                                </span>
+                            </div>
+
+                            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
+                                Paddle through the calm, turquoise waters of the Knysna Lagoon, surrounded by lush indigenous forest and the famous Knysna Heads.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-6 pt-0 grid grid-cols-2 gap-3 mt-4">
+                        <button onclick="openBookingModal('Knysna Lagoon Kayak Tour')" class="bg-slateNavy-900 hover:bg-slateNavy-950 text-white font-bold text-xs py-2.5 rounded-lg transition text-center shadow-sm">
+                            Book Now
+                        </button>
+                        <button onclick="openDetailsModal('Knysna Lagoon Kayak Tour', 'Paddle through serene coastal estuaries and marine protected areas. Great for families and birdwatchers looking for a peaceful lagoon excursion.', 'R280', 'Knysna', '2-3 hours', 'Easy')" class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 rounded-lg transition text-center">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 3: Tsitsikamma Forest Zip-line -->
+                <div class="activity-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 flex flex-col justify-between" data-category="Zip-lining">
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?auto=format&fit=crop&q=80&w=800" alt="Tsitsikamma Forest Zip-line" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-peach text-white font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-md shadow-sm">
+                                ZIP-LINING
+                            </span>
+                            <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-slateNavy-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">
+                                From R450
+                            </span>
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="serif-title text-xl font-bold text-slateNavy-900 mb-2">
+                                Tsitsikamma Forest Zip-line
+                            </h3>
+                            
+                            <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
+                                <i class="fa-solid fa-location-dot text-gray-400"></i>
+                                <span>Tsitsikamma, Eastern Cape</span>
+                            </div>
+
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md font-medium">
+                                    <i class="fa-regular fa-clock text-gray-400 text-xs"></i> 3 hours
+                                </span>
+                                <span class="inline-flex items-center text-xs text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-md font-semibold">
+                                    Easy
+                                </span>
+                            </div>
+
+                            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
+                                Soar through the ancient Tsitsikamma forest canopy on 10 interconnected zip-lines, taking in stunning gorge views and indigenous forest biodiversity.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-6 pt-0 grid grid-cols-2 gap-3 mt-4">
+                        <button onclick="openBookingModal('Tsitsikamma Forest Zip-line')" class="bg-slateNavy-900 hover:bg-slateNavy-950 text-white font-bold text-xs py-2.5 rounded-lg transition text-center shadow-sm">
+                            Book Now
+                        </button>
+                        <button onclick="openDetailsModal('Tsitsikamma Forest Zip-line', 'Glide up to 30 meters above the forest floor. Safely guided by experienced safety instructors, suitable for ages 7 and up.', 'R450', 'Tsitsikamma', '3 hours', 'Easy')" class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 rounded-lg transition text-center">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 4: Cederberg Rock Climbing -->
+                <div class="activity-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 flex flex-col justify-between" data-category="Rock Climbing">
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&q=80&w=800" alt="Cederberg Rock Climbing" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-peach text-white font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-md shadow-sm">
+                                ROCK CLIMBING
+                            </span>
+                            <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-slateNavy-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">
+                                From R200
+                            </span>
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="serif-title text-xl font-bold text-slateNavy-900 mb-2">
+                                Cederberg Rock Climbing
+                            </h3>
+                            
+                            <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
+                                <i class="fa-solid fa-location-dot text-gray-400"></i>
+                                <span>Rocklands, Western Cape</span>
+                            </div>
+
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md font-medium">
+                                    <i class="fa-regular fa-clock text-gray-400 text-xs"></i> Full day
+                                </span>
+                                <span class="inline-flex items-center text-xs text-rose-800 bg-rose-100 px-2.5 py-1 rounded-md font-semibold">
+                                    Challenging
+                                </span>
+                            </div>
+
+                            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
+                                Scale world-renowned sandstone formations in the Cederberg Wilderness. From beginner boulders to advanced multi-pitch routes, the Cederberg delivers unforgettable climbing.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-6 pt-0 grid grid-cols-2 gap-3 mt-4">
+                        <button onclick="openBookingModal('Cederberg Rock Climbing')" class="bg-slateNavy-900 hover:bg-slateNavy-950 text-white font-bold text-xs py-2.5 rounded-lg transition text-center shadow-sm">
+                            Book Now
+                        </button>
+                        <button onclick="openDetailsModal('Cederberg Rock Climbing', 'Climb world famous orange sandstone crags in Rocklands. Includes full gear rental, safety harness, chalk, and expert belayers.', 'R200', 'Cederberg', 'Full day', 'Challenging')" class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 rounded-lg transition text-center">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 5: Cape Winelands Mountain Bike -->
+                <div class="activity-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 flex flex-col justify-between" data-category="Mountain Biking">
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=800" alt="Cape Winelands Mountain Bike" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-peach text-white font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-md shadow-sm">
+                                MOUNTAIN BIKING
+                            </span>
+                            <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-slateNavy-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">
+                                From R350
+                            </span>
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="serif-title text-xl font-bold text-slateNavy-900 mb-2">
+                                Cape Winelands Mountain Bike
+                            </h3>
+                            
+                            <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
+                                <i class="fa-solid fa-location-dot text-gray-400"></i>
+                                <span>Stellenbosch, Western Cape</span>
+                            </div>
+
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md font-medium">
+                                    <i class="fa-regular fa-clock text-gray-400 text-xs"></i> 4&ndash;5 hours
+                                </span>
+                                <span class="inline-flex items-center text-xs text-amber-800 bg-amber-100 px-2.5 py-1 rounded-md font-semibold">
+                                    Moderate
+                                </span>
+                            </div>
+
+                            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
+                                Ride through world-class wine farms and forested mountain trails in the Cape Winelands. Single-track singletracks, river crossings, and vineyard vistas await.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-6 pt-0 grid grid-cols-2 gap-3 mt-4">
+                        <button onclick="openBookingModal('Cape Winelands Mountain Bike')" class="bg-slateNavy-900 hover:bg-slateNavy-950 text-white font-bold text-xs py-2.5 rounded-lg transition text-center shadow-sm">
+                            Book Now
+                        </button>
+                        <button onclick="openDetailsModal('Cape Winelands Mountain Bike', 'Custom dual-suspension mountain bikes included. Ride through Stellenbosch valleys with optional wine tasting stops along the route.', 'R350', 'Stellenbosch', '4-5 hours', 'Moderate')" class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 rounded-lg transition text-center">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 6: Orange River Rafting -->
+                <div class="activity-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 flex flex-col justify-between" data-category="Rafting">
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&q=80&w=800" alt="Orange River Rafting" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-peach text-white font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-md shadow-sm">
+                                RAFTING
+                            </span>
+                            <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-slateNavy-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">
+                                From R620
+                            </span>
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="serif-title text-xl font-bold text-slateNavy-900 mb-2">
+                                Orange River Rafting
+                            </h3>
+                            
+                            <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
+                                <i class="fa-solid fa-location-dot text-gray-400"></i>
+                                <span>Augrabies, Northern Cape</span>
+                            </div>
+
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md font-medium">
+                                    <i class="fa-regular fa-clock text-gray-400 text-xs"></i> Full day
+                                </span>
+                                <span class="inline-flex items-center text-xs text-rose-800 bg-rose-100 px-2.5 py-1 rounded-md font-semibold">
+                                    Challenging
+                                </span>
+                            </div>
+
+                            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
+                                Navigate the thundering rapids of the Orange River through the dramatic Augrabies Gorge. Multi-day expeditions available for the ultimate wilderness adventure.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-6 pt-0 grid grid-cols-2 gap-3 mt-4">
+                        <button onclick="openBookingModal('Orange River Rafting')" class="bg-slateNavy-900 hover:bg-slateNavy-950 text-white font-bold text-xs py-2.5 rounded-lg transition text-center shadow-sm">
+                            Book Now
+                        </button>
+                        <button onclick="openDetailsModal('Orange River Rafting', 'Exhilarating river rafting expedition through desert gorges and Class III-IV rapids. All safety gear, life jackets, and riverside lunch provided.', 'R620', 'Augrabies', 'Full day', 'Challenging')" class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 rounded-lg transition text-center">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="bg-sage-700 text-white py-16 px-4 sm:px-6 lg:px-8 mt-12 text-center">
+            <div class="max-w-3xl mx-auto space-y-4">
+                <h2 class="serif-title text-3xl sm:text-4xl font-bold text-white">
+                    Ready for Your Next Adventure?
+                </h2>
+                <p class="text-gray-100 text-sm sm:text-base leading-relaxed font-light">
+                    Our team is on hand to help you plan the perfect escape. Get in touch for personalised packages, group bookings, or custom itineraries.
+                </p>
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a href="home.html" class="inline-flex items-center gap-2 border border-white/30 text-white hover:bg-white/10 font-bold px-6 py-3 rounded-full text-sm transition">
+                        <span>Previous: Home</span>
+                    </a>
+                    <a href="individual.html" class="inline-flex items-center gap-2 bg-peach hover:bg-peach-hover text-slateNavy-900 font-bold px-8 py-3.5 rounded-full text-sm transition shadow-md hover:shadow-lg">
+                        <span>Next: Individual</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-plum-900 text-gray-300 pt-16 pb-12 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 mb-12">
+            
+            <!-- Column 1: Brand Info & Social Icons (5 cols) -->
+            <div class="md:col-span-5 space-y-5">
+                <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 bg-white/10 rounded border border-white/20 flex items-center justify-center p-1">
+                        <i class="fa-solid fa-mountain text-emerald-400 text-base"></i>
+                    </div>
+                    <div>
+                        <span class="block text-sm font-extrabold tracking-wider uppercase text-white">ADVENTURE ESCAPE SA</span>
+                        <div class="flex items-center gap-1 mt-0.5 text-[8px] text-gray-400">
+                            <i class="fa-solid fa-compass"></i>
+                            <i class="fa-solid fa-person-hiking"></i>
+                            <i class="fa-solid fa-water"></i>
+                            <i class="fa-solid fa-tree"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-sm text-gray-300 leading-relaxed max-w-md font-light">
+                    Adventure Escape SA connects thrill-seekers with South Africa's most breathtaking outdoor experiences. Explore, experience, and escape into the wild.
+                </p>
+
+                <!-- Social Media Icons -->
+                <div class="flex items-center gap-3 pt-2">
+                    <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-peach hover:text-slateNavy-900 flex items-center justify-center transition text-sm">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-peach hover:text-slateNavy-900 flex items-center justify-center transition text-sm">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-peach hover:text-slateNavy-900 flex items-center justify-center transition text-sm">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-peach hover:text-slateNavy-900 flex items-center justify-center transition text-sm">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Column 2: Quick Links (3 cols) -->
+            <div class="md:col-span-3 space-y-4">
+                <h4 class="text-xs font-bold text-peach uppercase tracking-widest">
+                    QUICK LINKS
+                </h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="home.html" class="hover:text-white transition">Home</a></li>
+                    <li><a href="overview.html" class="text-white font-medium hover:text-peach transition">Overview</a></li>
+                    <li><a href="about.html" class="hover:text-white transition">About Us</a></li>
+                    <li><a href="contact.html" class="hover:text-white transition">Contact Us</a></li>
+                    <li><a href="#" onclick="openBookingModal('General')" class="hover:text-white transition">Book Now</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Contact Info (4 cols) -->
+            <div class="md:col-span-4 space-y-4">
+                <h4 class="text-xs font-bold text-peach uppercase tracking-widest">
+                    CONTACT
+                </h4>
+                <ul class="space-y-3 text-sm text-gray-300">
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-location-dot text-peach text-xs mt-1"></i>
+                        <span>12 Victoria Road, Cape Town, Western Cape 8001</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-phone text-peach text-xs"></i>
+                        <a href="tel:+27215550123" class="hover:text-white transition">+27 21 555 0123</a>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-regular fa-envelope text-peach text-xs"></i>
+                        <a href="mailto:info@adventureescapesa.co.za" class="hover:text-white transition">info@adventureescapesa.co.za</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Sub-footer Copyright -->
+        <div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400 gap-4">
+            <p>&copy; 2026 Adventure Escape SA. All rights reserved.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-gray-200">Privacy Policy</a>
+                <a href="#" class="hover:text-gray-200">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOOKING MODAL -->
+    <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm modal-backdrop" onclick="closeBookingModal()"></div>
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 relative z-10 shadow-2xl space-y-5">
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="serif-title text-2xl font-bold text-slateNavy-900" id="booking-title">Book Activity</h3>
+            <p class="text-xs text-gray-500">Fill in your details below to reserve your spot.</p>
+            
+            <form onsubmit="submitBooking(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Your Name</label>
+                    <input type="text" required placeholder="e.g. John Doe" class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-slateNavy-900">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email Address</label>
+                    <input type="email" required placeholder="john@example.com" class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-slateNavy-900">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Preferred Date</label>
+                    <input type="date" required class="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-slateNavy-900">
+                </div>
+                <button type="submit" class="w-full bg-peach hover:bg-peach-hover text-slateNavy-900 font-bold py-3 rounded-xl transition">
+                    Confirm Reservation Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DETAILS MODAL -->
+    <div id="details-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm modal-backdrop" onclick="closeDetailsModal()"></div>
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 relative z-10 shadow-2xl space-y-4">
+            <button onclick="closeDetailsModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="serif-title text-2xl font-bold text-slateNavy-900" id="modal-activity-title">Activity Title</h3>
+            <div class="flex items-center gap-3 text-xs font-semibold text-gray-500 border-b pb-3" id="modal-meta">
+                <!-- Meta dynamic -->
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed" id="modal-description">Detailed description here...</p>
+            <div class="pt-4 flex gap-3">
+                <button id="modal-book-btn" class="flex-1 bg-slateNavy-900 hover:bg-slateNavy-950 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                    Book This Activity
+                </button>
+                <button onclick="closeDetailsModal()" class="px-5 border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs rounded-xl transition">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter logic for activity cards
+        function filterActivities(category, buttonElement) {
+            // Update active pill styling
+            const pills = document.querySelectorAll('.filter-pill');
+            pills.forEach(pill => pill.classList.remove('active'));
+            buttonElement.classList.add('active');
+
+            const cards = document.querySelectorAll('.activity-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'All' || cardCategory === category) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update visible activity count
+            document.getElementById('activity-count').innerText = `${visibleCount} ${visibleCount === 1 ? 'activity' : 'activities'}`;
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Booking Modal functions
+        function openBookingModal(title) {
+            document.getElementById('booking-title').innerText = `Book: ${title}`;
+            document.getElementById('booking-modal').classList.remove('hidden');
+        }
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+        function submitBooking(e) {
+            e.preventDefault();
+            alert('Thank you! Your booking request has been submitted. Our team will contact you shortly.');
+            closeBookingModal();
+        }
+
+        // Details Modal functions
+        function openDetailsModal(title, description, price, location, duration, difficulty) {
+            document.getElementById('modal-activity-title').innerText = title;
+            document.getElementById('modal-description').innerText = description;
+            document.getElementById('modal-meta').innerHTML = `
+                <span><i class="fa-solid fa-location-dot"></i> ${location}</span>
+                <span>•</span>
+                <span><i class="fa-regular fa-clock"></i> ${duration}</span>
+                <span>•</span>
+                <span class="text-peach font-bold">${price}</span>
+            `;
+            
+            const bookBtn = document.getElementById('modal-book-btn');
+            bookBtn.onclick = () => {
+                closeDetailsModal();
+                openBookingModal(title);
+            };
+
+            document.getElementById('details-modal').classList.remove('hidden');
+        }
+        function closeDetailsModal() {
+            document.getElementById('details-modal').classList.add('hidden');
+        }
+        function openContactModal() {
+            openBookingModal('General Inquiry');
+        }
+    </script>
+</body>
+</html>
